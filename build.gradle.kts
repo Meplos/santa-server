@@ -20,7 +20,6 @@ repositories {
 tasks.create("stage") {
     dependsOn("installDist")
 }
-
 dependencies {
     implementation("io.ktor:ktor-server-core:$ktor_version")
     implementation("io.ktor:ktor-server-netty:$ktor_version")
