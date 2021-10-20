@@ -17,7 +17,7 @@ repositories {
     mavenCentral()
 }
 
-task("stage") {
+tasks.create("stage") {
     dependsOn("installDist")
 }
 
