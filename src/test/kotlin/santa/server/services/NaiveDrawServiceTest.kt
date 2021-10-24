@@ -5,7 +5,7 @@ import org.junit.Test
 import santa.server.strategy.IDrawStrategy
 import java.util.*
 
-class DrawServiceTest {
+class NaiveDrawServiceTest {
     val drawService : IDrawStrategy<String> = NaiveDrawService()
 
         @Test
@@ -40,45 +40,5 @@ class DrawServiceTest {
             }
         }
     }
-
-    @Test
-    fun drawHundredPerfTest() {
-        val list1 = LinkedList<String>();
-        for (i in 0..1000) {
-            list1.push(i.toString())
-        }
-        for (i in 0..100) {
-            val time1 = getTimeMillis()
-            val association =drawService.draw(list1);
-            val time2 = getTimeMillis()
-
-            assert(time2 - time1 < 50)
-
-            for (item in association) {
-                assert(item.key !== item.value);
-            }
-        }
-    }
-
-
-    @Test
-    fun drawHundredThousandPerfTest() {
-        val list1 = LinkedList<String>();
-        for (i in 0..100000) {
-            list1.push(i.toString())
-        }
-        for (i in 0..100) {
-            val time1 = getTimeMillis()
-            val association =drawService.draw(list1);
-            val time2 = getTimeMillis()
-
-            assert(time2 - time1 < 1000)
-            for (item in association) {
-                assert(item.key !== item.value);
-            }
-
-        }
-    }
-
 
 }
