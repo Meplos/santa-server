@@ -2,14 +2,17 @@ package santa.server.services
 
 import io.ktor.util.date.*
 import org.junit.Test
+import santa.server.strategy.IDrawStrategy
 import java.util.*
 
-class SantaAssociationServiceTest {
-    @Test
+class DrawServiceTest {
+    val drawService : IDrawStrategy<String> = NaiveDrawService()
+
+        @Test
     fun draw2inputTest() {
         val list1 = mutableListOf<String>("1", "2");
         for (i in 0..100) {
-            val association = SantaAssociationService.associate(list1);
+            val association = drawService.draw(list1);
             for (item in association) {
                 assert(item.key !== item.value);
             }
@@ -20,7 +23,7 @@ class SantaAssociationServiceTest {
     fun drawImpairTest() {
         val list1 = mutableListOf<String>("1", "2", "3");
         for (i in 0..100) {
-            val association = SantaAssociationService.associate(list1);
+            val association =drawService.draw(list1);
             for (item in association) {
                 assert(item.key !== item.value);
             }
@@ -31,7 +34,7 @@ class SantaAssociationServiceTest {
     fun drawPairSup2Test() {
         val list1 = mutableListOf<String>("1", "2", "3", "4");
         for (i in 0..100) {
-            val association = SantaAssociationService.associate(list1);
+            val association =drawService.draw(list1);
             for (item in association) {
                 assert(item.key !== item.value);
             }
@@ -46,7 +49,7 @@ class SantaAssociationServiceTest {
         }
         for (i in 0..100) {
             val time1 = getTimeMillis()
-            val association = SantaAssociationService.associate(list1);
+            val association =drawService.draw(list1);
             val time2 = getTimeMillis()
 
             assert(time2 - time1 < 50)
@@ -66,10 +69,10 @@ class SantaAssociationServiceTest {
         }
         for (i in 0..100) {
             val time1 = getTimeMillis()
-            val association = SantaAssociationService.associate(list1);
+            val association =drawService.draw(list1);
             val time2 = getTimeMillis()
 
-            assert(time2 - time1 < 800)
+            assert(time2 - time1 < 1000)
             for (item in association) {
                 assert(item.key !== item.value);
             }
