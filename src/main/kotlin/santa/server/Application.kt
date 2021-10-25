@@ -4,18 +4,22 @@ import io.ktor.application.*
 import io.ktor.features.*
 import io.ktor.response.*
 import io.ktor.routing.*
-import io.ktor.gson.*
+import io.ktor.serialization.*
+
 fun main(argv: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(argv)
 
 
 fun Application.module(testing: Boolean = false) {
     install(CORS)
     install(ContentNegotiation) {
-        gson()
+        json()
     }
     routing {
         get("/test") {
             call.respondText("Hello, world!")
+        }
+        post("/") {
+
         }
     }
 }

@@ -30,8 +30,6 @@ class NaiveDrawService<T> : AbstractDrawStrategy<T>() {
             }
             result[santa] = hat.removeAt(childIndex)
         }
-        val first = mutableOrigin.removeFirst()
-        val second = mutableOrigin.removeFirst()
 
         result.putAll(this.twoElementDraft(hat, origin[origin.size - 2], origin[origin.size - 1]))
 
