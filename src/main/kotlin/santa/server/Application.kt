@@ -19,7 +19,13 @@ fun Application.module(testing: Boolean = false) {
             call.respondText("Hello, world!")
         }
         post("/") {
-
+            //TODO: Create new party
+        }
+        get("/{id}") {
+            //TODO: Get participants name
+        }
+        get("/{id}/participant/{name}"){
+            //TODO: Return persons associate to name
         }
     }
 }
