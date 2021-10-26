@@ -1,10 +1,7 @@
 package santa.server.domain.models
 
 import org.junit.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertFalse
-import kotlin.test.assertNotEquals
-import kotlin.test.assertNotNull
+import kotlin.test.*
 
 class PartyTest {
     @Test
@@ -17,8 +14,12 @@ class PartyTest {
 
     @Test
     fun getParticipant() {
-        val expected = listOf("Cloé", "Célia", "Nina", "Elian")
-        val party = Party(mapOf("Cloé" to "Célia", "Célia" to "Nina", "Nina" to "Elian", "Elian" to "Cloé"))
-     }
+        val map = mapOf("Cloé" to "Célia", "Célia" to "Nina", "Nina" to "Elian", "Elian" to "Cloé")
+        val expected = map.keys
+        val party = Party(map)
+        assertNotNull(party.getParticipants())
+        assertEquals(party.getParticipants().size, expected.size)
+        assert(party.getParticipants().containsAll(expected))
+    }
 
 }

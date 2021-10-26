@@ -4,7 +4,13 @@ import santa.server.domain.models.Party
 import santa.server.domain.repository.IPartyRepository
 import santa.server.domain.repository.IRepository
 
-//TODO make Doc
+/**
+ * InMemoryPartyRepository
+ * implement IPartyRepository
+ * In Memory party repository implementation.
+ * ! No ata persistance
+ * @constructor create empty party map
+ * */
 class InMemoryPartyRepository(private var parties: MutableMap<String, Party> = HashMap<String, Party>()) :
     IPartyRepository {
 
