@@ -35,7 +35,7 @@ class PartyController(
         val association = drawStrategy.draw(participants)
         this.partyRepository.createOrUpdate(id, Party(association))
     }
-    
+
     /**
      * getParticipantOf
      * @param id of the requested resource
