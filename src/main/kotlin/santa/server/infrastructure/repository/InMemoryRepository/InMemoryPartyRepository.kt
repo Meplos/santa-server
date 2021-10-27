@@ -14,16 +14,17 @@ import santa.server.domain.repository.IRepository
 class InMemoryPartyRepository(private var parties: MutableMap<String, Party> = HashMap<String, Party>()) :
     IPartyRepository {
 
-    override fun createOrUpdate(id: String?, item: Party) {
+    override fun createOrUpdate(id: String?, item: Party) : String  {
         if (id != null) {
             val party = parties[id]
             if (party != null) {
                 parties[id] = item
-                return
+                return id;
             }
         }
         val newId = item.hashCode().toString()
         parties[newId] = item
+        return newId;
     }
 
     override fun findOneBy(id: String): Party {

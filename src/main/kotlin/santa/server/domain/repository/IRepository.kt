@@ -15,7 +15,7 @@ interface IRepository<T> {
      * @param item new value of the resource
      * @throws Exception if id not null and not exist in the repo
      * */
-    fun createOrUpdate(id: String?, item: T)
+    fun createOrUpdate(id: String?, item: T) : String
 
     /**
      * findOneBy

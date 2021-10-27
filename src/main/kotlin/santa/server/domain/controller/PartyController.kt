@@ -31,9 +31,9 @@ class PartyController(
      * @param participants list of the party
      * @throws Exception (EntityNotFound)
      * */
-    fun createOrUpdate(id: String?, participants: List<String>) {
+    fun createOrUpdate(id: String?, participants: List<String>): String {
         val association = drawStrategy.draw(participants)
-        this.partyRepository.createOrUpdate(id, Party(association))
+        return this.partyRepository.createOrUpdate(id, Party(association))
     }
 
     /**
