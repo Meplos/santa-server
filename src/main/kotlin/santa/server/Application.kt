@@ -7,6 +7,7 @@ import io.ktor.request.*
 import io.ktor.response.*
 import io.ktor.routing.*
 import io.ktor.serialization.*
+import io.netty.handler.codec.http.HttpResponse
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import santa.server.domain.controller.PartyController
@@ -18,7 +19,6 @@ fun main(argv: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(argv)
 
 fun Application.module(testing: Boolean = false) {
     val partyController = PartyController(InMemoryPartyRepository(), FilteredDrawService())
-    val formatter = Json { prettyPrint = true }
     install(CORS)
     install(ContentNegotiation) {
         json(Json {
@@ -36,18 +36,23 @@ fun Application.module(testing: Boolean = false) {
             call.respond(mapOf("id" to id))
         }
         get("/{id}") {
-            //TODO: Get participants name
-            var responseCode = HttpStatusCode.BadRequest
-            var message = ""
             val id = call.parameters["id"]
             if (!id.isNullOrEmpty()) {
-                val participants = partyController.getById(id)
-                call.respond(participants)
+                val participants = partyController.getById(id).getParticipants()
+                call.respond(mapOf("participants" to participants))
+            } else {
+                call.respond(HttpStatusCode.BadRequest)
             }
-            call.respond(responseCode, message)
         }
         get("/{id}/participant/{name}") {
-            //TODO: Return persons associate to name
+            val id = call.parameters["id"]
+            val name = call.parameters["name"]
+            if (id.isNullOrEmpty() || name.isNullOrEmpty()) {
+                call.respond(HttpStatusCode.BadRequest)
+            } else {
+                val res = partyController.getSanta(id, name)
+                call.respond(mapOf("name" to res))
+            }
         }
     }
 }

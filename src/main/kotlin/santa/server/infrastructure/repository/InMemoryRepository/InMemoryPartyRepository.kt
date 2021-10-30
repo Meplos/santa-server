@@ -3,6 +3,8 @@ package santa.server.infrastructure.repository.InMemoryRepository
 import santa.server.domain.models.Party
 import santa.server.domain.repository.IPartyRepository
 import santa.server.domain.repository.IRepository
+import java.util.*
+import kotlin.collections.HashMap
 
 /**
  * InMemoryPartyRepository
@@ -19,12 +21,12 @@ class InMemoryPartyRepository(private var parties: MutableMap<String, Party> = H
             val party = parties[id]
             if (party != null) {
                 parties[id] = item
-                return id;
+                return id
             }
         }
-        val newId = item.hashCode().toString()
+        val newId = UUID.randomUUID().toString()
         parties[newId] = item
-        return newId;
+        return newId
     }
 
     override fun findOneBy(id: String): Party {
@@ -39,7 +41,7 @@ class InMemoryPartyRepository(private var parties: MutableMap<String, Party> = H
 
     override fun getSantaFor(id: String, name: String): String {
         val party = findOneBy(id)
-        return party.getSantaFor(name);
+        return party.getSantaFor(name)
     }
 
 }

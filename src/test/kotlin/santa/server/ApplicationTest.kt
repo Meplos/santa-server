@@ -1,5 +1,6 @@
 package santa.server
 
+import com.google.gson.Gson
 import io.ktor.application.*
 import io.ktor.http.*
 import io.ktor.server.testing.*
@@ -31,6 +32,7 @@ class ApplicationTest {
     }
 
     @Test
+    @kotlinx.serialization.ExperimentalSerializationApi
     fun testCreate() {
         withTestApplication(Application::module) {
             with(handleRequest(HttpMethod.Post, "/") {
@@ -41,7 +43,16 @@ class ApplicationTest {
                 assertEquals(HttpStatusCode.OK, response.status())
                 assertNotNull(response.content)
                 assertTrue( response.content!!.contains("id"))
+                val res = Gson().toJson(response.content)
+                println(res)
             }
+        }
+    }
+
+    @Test
+    fun testGetParticipant() {
+        withTestApplication (Application::module){
+           with(handleRequest(HttpMethod.Get, "/") {  }) {}
         }
     }
 
