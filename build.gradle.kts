@@ -7,6 +7,7 @@ plugins {
     kotlin("jvm") version "1.5.31"
     id("org.jetbrains.dokka") version "1.5.30"
     id("org.jetbrains.kotlinx.kover") version "0.3.0"
+    id("org.jetbrains.kotlin.plugin.serialization") version "1.5.31"
 }
 
 group = "com.example"
@@ -49,7 +50,12 @@ tasks.test {
 dependencies {
     implementation("io.ktor:ktor-server-core:$ktor_version")
     implementation("io.ktor:ktor-server-netty:$ktor_version")
+    implementation("io.ktor:ktor-gson:$ktor_version")
+    implementation ("io.ktor:ktor-serialization:$ktor_version")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.0")
     implementation("ch.qos.logback:logback-classic:$logback_version")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.0")
+    testImplementation("com.google.code.gson:gson:2.8.8")
     testImplementation("io.ktor:ktor-server-tests:$ktor_version")
     testImplementation("io.ktor:ktor-server-test-host:$ktor_version")
     testImplementation("org.jetbrains.kotlin:kotlin-test:$kotlin_version")

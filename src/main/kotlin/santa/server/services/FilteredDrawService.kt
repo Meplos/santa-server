@@ -21,7 +21,7 @@ class FilteredDrawService<T> : AbstractDrawStrategy<T>() {
     override fun draw(origin: List<T>): Map<T, T> {
         val hat = origin.toMutableList()
         val result = HashMap<T, T>()
-        for ((index, element) in origin.withIndex()) {
+        for ( element in origin) {
             if (hat.size <= 2) break
 
             //Remove element from the drawing rules
