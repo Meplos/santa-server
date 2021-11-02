@@ -31,12 +31,18 @@ fun Application.module(testing: Boolean = false) {
 
         }
         post("/") {
+            log.info("[CREATE PARTY] Create  requested by - ${call.request.host() } - with ${call.request.userAgent()}" )
+
             val body = call.receive<List<String>>()
             val id = partyController.createOrUpdate(null, body)
+            log.info("[CREATE PARTY] Create party $id" )
+
             call.respond(mapOf("id" to id))
         }
         get("/{id}") {
             val id = call.parameters["id"]
+            log.info("[GETPARTICIPANT] party $id requested by - ${call.request.host() } - with ${call.request.userAgent()}" )
+
             if (!id.isNullOrEmpty()) {
                 val participants = partyController.getById(id).getParticipants()
                 call.respond(mapOf("participants" to participants))
@@ -46,6 +52,7 @@ fun Application.module(testing: Boolean = false) {
         }
         get("/{id}/participant/{name}") {
             val id = call.parameters["id"]
+            log.info("[GETSANTA] party $id requested by - ${call.request.host() } - with ${call.request.userAgent()}" )
             val name = call.parameters["name"]
             if (id.isNullOrEmpty() || name.isNullOrEmpty()) {
                 call.respond(HttpStatusCode.BadRequest)
