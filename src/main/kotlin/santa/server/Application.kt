@@ -19,7 +19,18 @@ fun main(argv: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(argv)
 
 fun Application.module(testing: Boolean = false) {
     val partyController = PartyController(InMemoryPartyRepository(), FilteredDrawService())
-    install(CORS)
+    install(CORS) {
+        method(HttpMethod.Options)
+        method(HttpMethod.Put)
+        method(HttpMethod.Delete)
+        method(HttpMethod.Patch)
+        header(HttpHeaders.Authorization)
+        header(HttpHeaders.ContentType)
+        // header("any header") if you want to add any header
+        allowCredentials = true
+        allowNonSimpleContentTypes = true
+        anyHost()
+    }
     install(ContentNegotiation) {
         json(Json {
             prettyPrint = testing
