@@ -29,7 +29,7 @@ fun Application.module(testing: Boolean = false) {
         allowNonSimpleContentTypes = true
         allowCredentials = true
         allowSameOrigin = true
-        host("*", listOf("http", "https")) // frontendHost might be "*"
+        anyHost()
     }
     install(ContentNegotiation) {
         json(Json {
