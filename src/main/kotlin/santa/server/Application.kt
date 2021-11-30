@@ -25,11 +25,11 @@ fun Application.module(testing: Boolean = false) {
         method(HttpMethod.Delete)
         method(HttpMethod.Patch)
         header(HttpHeaders.Authorization)
-        header(HttpHeaders.ContentType)
-        // header("any header") if you want to add any header
-        allowCredentials = true
+        header(HttpHeaders.AccessControlAllowOrigin)
         allowNonSimpleContentTypes = true
-        anyHost()
+        allowCredentials = true
+        allowSameOrigin = true
+        host("*", listOf("http", "https")) // frontendHost might be "*"
     }
     install(ContentNegotiation) {
         json(Json {
