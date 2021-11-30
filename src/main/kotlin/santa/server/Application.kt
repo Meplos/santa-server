@@ -20,12 +20,6 @@ fun main(argv: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(argv)
 fun Application.module(testing: Boolean = false) {
     val partyController = PartyController(InMemoryPartyRepository(), FilteredDrawService())
     install(CORS) {
-        method(HttpMethod.Options)
-        method(HttpMethod.Put)
-        method(HttpMethod.Delete)
-        method(HttpMethod.Patch)
-        method(HttpMethod.Get)
-        header(HttpHeaders.ContentType)
         anyHost()
     }
     install(ContentNegotiation) {
