@@ -24,11 +24,8 @@ fun Application.module(testing: Boolean = false) {
         method(HttpMethod.Put)
         method(HttpMethod.Delete)
         method(HttpMethod.Patch)
-        header(HttpHeaders.Authorization)
         header(HttpHeaders.AccessControlAllowOrigin)
-        allowNonSimpleContentTypes = true
-        allowCredentials = true
-        allowSameOrigin = true
+        header(HttpHeaders.ContentType)
         anyHost()
     }
     install(ContentNegotiation) {
