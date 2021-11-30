@@ -25,6 +25,7 @@ fun Application.module(testing: Boolean = false) {
         method(HttpMethod.Get)
         method(HttpMethod.Post)
         header(HttpHeaders.ContentType)
+        header(HttpHeaders.AccessControlAllowOrigin)
         allowCredentials = true
         allowNonSimpleContentTypes = true
     }
