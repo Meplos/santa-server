@@ -21,6 +21,11 @@ fun Application.module(testing: Boolean = false) {
     val partyController = PartyController(InMemoryPartyRepository(), FilteredDrawService())
     install(CORS) {
         anyHost()
+        method(HttpMethod.Options)
+        method(HttpMethod.Get)
+        method(HttpMethod.Post)
+        allowCredentials = true
+        allowNonSimpleContentTypes = true
     }
     install(ContentNegotiation) {
         json(Json {
