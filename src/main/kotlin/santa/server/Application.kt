@@ -24,6 +24,7 @@ fun Application.module(testing: Boolean = false) {
         method(HttpMethod.Options)
         method(HttpMethod.Get)
         method(HttpMethod.Post)
+        header(HttpHeaders.ContentType)
         allowCredentials = true
         allowNonSimpleContentTypes = true
     }
