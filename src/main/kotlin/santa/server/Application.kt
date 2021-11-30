@@ -24,7 +24,7 @@ fun Application.module(testing: Boolean = false) {
         method(HttpMethod.Put)
         method(HttpMethod.Delete)
         method(HttpMethod.Patch)
-        header(HttpHeaders.AccessControlAllowOrigin)
+        method(HttpMethod.Get)
         header(HttpHeaders.ContentType)
         anyHost()
     }
