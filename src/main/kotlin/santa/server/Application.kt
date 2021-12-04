@@ -24,6 +24,7 @@ fun Application.module(testing: Boolean = false) {
         anyHost()
         allowHeaders { true }
         HttpMethod.DefaultMethods.forEach{ method(it)}
+        allowNonSimpleContentTypes = true
     }
     install(ContentNegotiation) {
         json(Json {
