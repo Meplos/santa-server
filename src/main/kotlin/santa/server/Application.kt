@@ -32,6 +32,8 @@ fun Application.module(testing: Boolean = false) {
     }
     routing {
         get("/test") {
+            log.info("[TEST] Test requested by - ${call.request.host() } - with ${call.request.userAgent()}" )
+
             call.respondText("Hello, world!")
 
         }
