@@ -20,19 +20,10 @@ fun main(argv: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(argv)
 fun Application.module(testing: Boolean = false) {
     val partyController = PartyController(InMemoryPartyRepository(), FilteredDrawService())
     install(CORS) {
-        host("santa-ui.herokuapp.com/", listOf("http","https"))
-        method(HttpMethod.Options)
-        method(HttpMethod.Get)
-        method(HttpMethod.Post)
-        header(HttpHeaders.ContentType)
-        header(HttpHeaders.AccessControlAllowOrigin)
-        header(HttpHeaders.AccessControlAllowHeaders)
-        header(HttpHeaders.AccessControlAllowCredentials)
-        header(HttpHeaders.AccessControlAllowMethods)
-        header(HttpHeaders.AccessControlMaxAge)
 
-        allowCredentials = true
-        allowNonSimpleContentTypes = true
+        anyHost()
+        allowHeaders { true }
+        HttpMethod.DefaultMethods.forEach{ method(it)}
     }
     install(ContentNegotiation) {
         json(Json {
