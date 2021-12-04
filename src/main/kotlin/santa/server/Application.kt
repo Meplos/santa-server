@@ -47,7 +47,7 @@ fun Application.module(testing: Boolean = false) {
 
             call.respond(mapOf("id" to id))
         }
-        get("/{id}") {
+        get("/api/{id}") {
             val id = call.parameters["id"]
             log.info("[GETPARTICIPANT] party $id requested by - ${call.request.host() } - with ${call.request.userAgent()}" )
 
@@ -58,7 +58,7 @@ fun Application.module(testing: Boolean = false) {
                 call.respond(HttpStatusCode.BadRequest)
             }
         }
-        get("/{id}/participant/{name}") {
+        get("/api/{id}/participant/{name}") {
             val id = call.parameters["id"]
             log.info("[GETSANTA] party $id requested by - ${call.request.host() } - with ${call.request.userAgent()}" )
             val name = call.parameters["name"]
