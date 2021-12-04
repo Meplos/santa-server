@@ -20,7 +20,7 @@ fun main(argv: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(argv)
 fun Application.module(testing: Boolean = false) {
     val partyController = PartyController(InMemoryPartyRepository(), FilteredDrawService())
     install(CORS) {
-        anyHost()
+        host("santa-ui.herokuapp.com/", listOf("http","https"))
         method(HttpMethod.Options)
         method(HttpMethod.Get)
         method(HttpMethod.Post)
