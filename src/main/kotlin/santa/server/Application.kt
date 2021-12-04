@@ -37,7 +37,7 @@ fun Application.module(testing: Boolean = false) {
             call.respondText("Hello, world!")
 
         }
-        post("/") {
+        post("/api/create") {
             log.info("[CREATE PARTY] Create  requested by - ${call.request.host() } - with ${call.request.userAgent()}" )
 
             val body = call.receive<List<String>>()
